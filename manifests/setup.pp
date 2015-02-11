@@ -43,12 +43,6 @@ class desktoppicture::setup inherits desktoppicture::params {
   if $::osfamily != 'Darwin' {
       fail("unsupported osfamily: ${::osfamily}")
     }
-
-  file { 
-    owner  => root,
-    group  => wheel,
-    mode   => '0644',
-  }
   
   if ! defined(File['/usr/local']) {
     file { '/usr/local':
