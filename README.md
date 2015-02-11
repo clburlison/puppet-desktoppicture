@@ -30,3 +30,4 @@ mod 'puppetlabs/stdlib', '4.3.2'
 #To Do
 - **wallpaper.pp** - Use a statement to check for existent of script then notify the removal via the Exec["remove_old_scripts"]. This will make puppet run one time if asked to remove the files.
 	- Summary of Issue: Currently the removal of the wallpaper script is very non-puppet like. If ``desktoppicutre::ensure_wallpaper: 'absent'`` is set the class will try to remove the files on every puppet run. Since you can change the location and name of the script that sets the wallpaper in so many ways this was the only way I could think that removes all possible cases. 
+	- Or maybe check for current $version and remove old versions if they exsit that should be do-able?
