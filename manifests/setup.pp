@@ -14,7 +14,8 @@
 #  ---
 # desktoppicture::wallpaper: 
 #    '/private/etc/puppet/environments/production/modules/profile/files/wallpaper/bisd_default.jpg'
-# desktoppicture::wallpaper_path: '/usr/local/outset/login-every/'
+# desktoppicture::freq: 'every'
+# desktoppicture::priority: '8'
 # desktoppicutre::ensure_wallpaper: 'absent'
 #
 # Then simply, create a manifest and include the class...
@@ -27,7 +28,7 @@
 #
 #  class { 'desktoppicture':
 #   wallpaper  => '/Library/Desktop Pictures/Moon.jpg',
-#   wallpaper_path => '/usr/local/outset/login-every/',
+#   freq => 'every',
 #  }
 #
 # === Authors
@@ -37,7 +38,7 @@
 # === Copyright
 #
 # Copyright 2015 Clayton Burlison, unless otherwise noted.
-class desktoppicture::setup inherits desktoppicture::params{
+class desktoppicture::setup inherits desktoppicture::params {
     
   if $::osfamily != 'Darwin' {
       fail("unsupported osfamily: ${::osfamily}")
@@ -50,6 +51,9 @@ class desktoppicture::setup inherits desktoppicture::params{
     group  => wheel,
     mode   => '0755',
   }
+
+  contain desktoppicture::wallpaper
+  contain desktoppicture::desktops
 
     
 }

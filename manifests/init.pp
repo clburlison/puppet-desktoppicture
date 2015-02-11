@@ -19,6 +19,4 @@
 # Copyright 2015 Clayton Burlison, unless otherwise noted.
 class desktoppicture{
   include desktoppicture::setup
-  include desktoppicture::desktops
-  include desktoppicture::wallpaper
 }

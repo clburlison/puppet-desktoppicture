@@ -18,14 +18,9 @@
 # === Copyright
 #
 # Copyright 2015 Clayton Burlison, unless otherwise noted.
-class desktoppicture::desktops inherits desktoppicture::params{
-  
-  $script = 'puppet:///modules/desktoppicture/set_desktops.py'
-  require desktoppicture::setup
+class desktoppicture::desktops inherits desktoppicture::params {
 
-  if $ensure_desktop != 'present' and $ensure_desktop !='absent'{
-      fail('Invalid value for ensure')
-  }
+  $script = 'puppet:///modules/desktoppicture/set_desktops.py'
 
   if $ensure_desktop == 'present'{
       file {"$script_path":

@@ -18,15 +18,12 @@
 # === Copyright
 #
 # Copyright 2015 Clayton Burlison, unless otherwise noted.
-class desktoppicture::wallpaper inherits desktoppicture::params{
-  require desktoppicture::setup
-
-  if $ensure_wallpaper != 'present' and $ensure_wallpaper !='absent'{
-      fail('Invalid value for ensure')
-  }
+class desktoppicture::wallpaper inherits desktoppicture::params {
+  
+  $outset_path = '/usr/local/outset/login-'
   
   if $ensure_wallpaper == 'present'{
-      file {"${wallpaper_path}/${priority}-${wallpaper_name}":
+      file {"${outset_path}${freq}/${priority}-${wallpaper_name}-${version}.sh":
           owner  => root,
           group  => wheel,
           mode   => '0755',
@@ -34,9 +31,11 @@ class desktoppicture::wallpaper inherits desktoppicture::params{
       }
   }
 
-  if $ensure_wallpaper == 'absent' {
-      file {"${wallpaper_path}/${priority}-${wallpaper_name}":
-          ensure => absent,
-      }
-  }
+ if $ensure_wallpaper == 'absent' {
+   exec { "remove_old_scripts":
+       command   => "rm ${outset_path}*/*-${wallpaper_name}-*.sh 2>/dev/null",
+       path      => "/usr/local/bin/:/bin/",
+       logoutput => false,
+   }
+ }
 }
