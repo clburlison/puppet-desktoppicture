@@ -44,12 +44,34 @@ class desktoppicture::setup inherits desktoppicture::params {
       fail("unsupported osfamily: ${::osfamily}")
     }
 
-  file {['/usr','/usr/local','/usr/local/outset','/usr/local/outset/login-every',
-         '/usr/local/outset/login-once']: 
-    ensure => directory,
+  file { 
     owner  => root,
     group  => wheel,
-    mode   => '0755',
+    mode   => '0644',
+  }
+  
+  if ! defined(File['/usr/local']) {
+    file { '/usr/local':
+      ensure => directory,
+    }
+  }
+
+  if ! defined(File['/usr/local/outset']) {
+    file { '/usr/local/outset':
+      ensure => directory,
+    }
+  }
+  
+  if ! defined(File['/usr/local/outset/login-every']) {
+    file { '/usr/local/outset/login-every':
+      ensure => directory,
+    }
+  }
+
+  if ! defined(File['/usr/local/outset/login-once']) {
+    file { '/usr/local/outset/login-once':
+      ensure => directory,
+    }
   }
 
   contain desktoppicture::wallpaper
