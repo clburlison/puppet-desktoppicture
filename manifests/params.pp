@@ -1,6 +1,6 @@
 # == Class: desktoppicture::params
 #
-# This class holds the default paramaters for the desktoppicture module.
+# This class holds the default parameters for the desktoppicture module.
 #
 # == Parameters
 #
@@ -21,21 +21,21 @@
 #  Type: String (once OR every)
 #
 # [*$script_path*] 
-#  The absoute path to the set_desktops.py script. This is the script that
+#  The absolute path to the set_desktops.py script. This is the script that
 #    interacts with the SQLite database to change the desktop picture. 
 #  Default: '/usr/local/bin/set_desktops.py' 
 #  Type: String
 #
 # [*$priority*] 
 #  Modifies the script name to allow earlier or later runs used in conjunction
-#    with outset. Lower number = ealier in the run. 
+#    with outset. Lower number = earlier in the run. 
 #  Default: 10 
 #  Type: Integer
 #
 # [*$ensure_wallpaper*] 
 #  This value can be used to remove the background picture from the filesystem.
-#    Note: currently this setting this varraible to absent will not delete 
-#    files that have a different version, priority, or freq than definied.
+#    Note: currently this setting this variable  to absent will not delete 
+#    files that have a different version, priority, or freq than defined.
 #  Default: present 
 #  Type: Boolean (present OR absent)
 #
