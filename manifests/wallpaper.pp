@@ -24,9 +24,9 @@ class desktoppicture::wallpaper inherits desktoppicture::params {
   
   if $ensure_wallpaper == 'present'{
       file {"${outset_path}${freq}/${priority}-${wallpaper_name}-${version}.sh":
-          owner  => root,
-          group  => wheel,
-          mode   => '0755',
+          owner   => root,
+          group   => wheel,
+          mode    => '0755',
           content => template('desktoppicture/wallpaper.erb')
       }
   }
