@@ -15,16 +15,16 @@
 #  Default: 'wallpaper' 
 #  Type: String
 #
-# [*$freq*] 
-#  This is the frequency that you wish the desktop picture to be changed. 
-#  Default: 'once' 
-#  Type: String (once OR every)
-#
 # [*$script_path*] 
 #  The absolute path to the set_desktops.py script. This is the script that
 #    interacts with the SQLite database to change the desktop picture. 
 #  Default: '/usr/local/bin/set_desktops.py' 
 #  Type: String
+#
+# [*$freq*] 
+#  This is the frequency that you wish the desktop picture to be changed. 
+#  Default: 'once' 
+#  Type: String (once OR every)
 #
 # [*$priority*] 
 #  Modifies the script name to allow earlier or later runs used in conjunction
@@ -44,11 +44,11 @@
 #  Default: present 
 #  Type: Boolean (present OR absent)
 #
-# [*$version*] 
-#  This value is useful if you wish to update the desktop picture using the once 
-#    freq. Allowing you to send a new version of the script to clients.
-#  Default: 1 
-#  Type: Integer
+# [*ensure_current*]
+#   Ensures that the latest wallpaper is used. If using the same wallpaper name
+#     an update to the file will result in a refresh on client machines.
+#   Default: true
+#   Type: Bool
 #
 # === Examples
 #
@@ -65,21 +65,20 @@ class desktoppicture::params {
 
   $wallpaper         = hiera('desktoppicture::wallpaper', '/Library/Desktop Pictures/Moon.jpg')
   $wallpaper_name    = hiera('desktoppicture::wallpaper_name', 'wallpaper')
-  $freq              = hiera('desktoppicture::freq', 'once')
   $script_path       = hiera('desktoppicture::script_path', '/usr/local/bin/set_desktops.py')
+	$freq              = hiera('desktoppicture::freq', 'once')
   $priority          = hiera('desktoppicture::priority', '10')
   $ensure_wallpaper  = hiera('desktoppicture::ensure_wallpaper', 'present')
   $ensure_desktop    = hiera('desktoppicture::ensure_desktop', 'present')
-  $version           = hiera('desktoppicture::version', '1')
+	$ensure_current		 = hiera('destkoppicture::ensure_current', 'true')
   
   validate_absolute_path ($wallpaper)
   validate_string ($wallpaper_name)
-  
+  validate_absolute_path ($script_path)
+	
   if $freq != 'once' and $freq !='every'{
       fail('Invalid value for freq.')
   }
-
-  validate_absolute_path ($script_path)
 
   unless is_integer($priority) {
     fail("Invalid value for priority. Not an integer.")
@@ -92,8 +91,6 @@ class desktoppicture::params {
   if $ensure_wallpaper != 'present' and $ensure_wallpaper !='absent'{
       fail('Invalid value for ensure_wallpaper.')
   }
-  
-  unless is_integer($version) {
-    fail("Invalid value for version. Not an integer.")
-  }
+	
+	validate_bool ($ensure_current)
 }

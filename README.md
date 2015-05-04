@@ -21,12 +21,8 @@ mod 'outset',
 mod 'puppetlabs/stdlib', '4.3.2'		
 ``` 
 
-#FYI
-This module works but has some nasty code in a few places. Working on making things prettier.
-
 #Thanks
 - [Greg Neagle](http://github.com/gregneagle) - ``set_desktops.py``
-- [Graham Gilbert](http://github.com/grahamgilbert) - his modules? brainpower?
 - [Joseph Chilcote](https://github.com/chilcote/) - his awesome [outset project](https://github.com/chilcote/outset)
 
 #To Do
@@ -39,4 +35,6 @@ This module works but has some nasty code in a few places. Working on making thi
 	- Will need to pass a list of all current users on the filesystem
   - Use Graham's [python script](https://github.com/grahamgilbert/macscripts/blob/master/scriptRunnerToOutset/01-scriptRunnerToOutset_user_plist.py).
 	- Will need to create an additional parameter to enable admin to ensure the refresh or disable feature. ``$ensure_current``?
+	- Use defaults to remove key from pref-file
+	  - ``defaults delete ~/Library/Preferences/com.github.outset.once /usr/local/outset/login-once/wallpaper.sh``
 - Think about renaming the module to ``puppet-desktop``

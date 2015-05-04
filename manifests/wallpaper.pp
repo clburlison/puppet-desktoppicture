@@ -21,9 +21,10 @@
 class desktoppicture::wallpaper inherits desktoppicture::params {
   
   $outset_path = '/usr/local/outset/login-'
+	$remove_once_script = 'puppet:///modules/desktoppicture/remove_once.sh'
   
   if $ensure_wallpaper == 'present'{
-      file {"${outset_path}${freq}/${priority}-${wallpaper_name}-${version}.sh":
+      file {"${outset_path}${freq}/${priority}-${wallpaper_name}.sh":
           owner   => root,
           group   => wheel,
           mode    => '0755',
@@ -31,11 +32,22 @@ class desktoppicture::wallpaper inherits desktoppicture::params {
       }
   }
 
- if $ensure_wallpaper == 'absent' {
-   exec { "remove_old_scripts":
-       command   => "rm ${outset_path}*/*-${wallpaper_name}-*.sh 2>/dev/null",
-       path      => "/usr/local/bin/:/bin/",
-       logoutput => false,
-   }
- }
+	if $ensure_wallpaper == 'absent' {
+	    file {"${outset_path}${freq}/${priority}-${wallpaper_name}.sh":
+					ensure => absent,
+	 		}
+	}
+	
+	if $ensure_wallpaper == 'true' {
+		file { "$wallpaper" : 
+		  audit => content, 
+		}
+	
+		exec { "remove_once":
+			 command 				=> "${remove_once_script} ${wallpaper_name}",
+			 path      => "/usr/local/bin/:/bin/",
+		   refreshonly    => true,
+		   subscribe      => file["$wallpaper"],
+		}
+	}
 }

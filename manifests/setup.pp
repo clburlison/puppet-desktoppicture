@@ -41,7 +41,7 @@
 class desktoppicture::setup inherits desktoppicture::params {
     
   if $::osfamily != 'Darwin' {
-      fail("unsupported osfamily: ${::osfamily}")
+      fail("Unsupported osfamily: ${::osfamily}")
     }
   
   if ! defined(File['/usr/local']) {
@@ -70,6 +70,5 @@ class desktoppicture::setup inherits desktoppicture::params {
 
   contain desktoppicture::wallpaper
   contain desktoppicture::desktops
-
     
 }
