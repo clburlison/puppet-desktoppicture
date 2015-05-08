@@ -1,6 +1,6 @@
 # == Class: desktoppicture::wallpaper
 #
-# This class sets the destkop wallpaper script. This script is responsible for
+# This class sets the desktop wallpaper script. This script is responsible for
 #   setting the defined wallpaper. 
 #
 # == Parameters
@@ -38,16 +38,16 @@ class desktoppicture::wallpaper inherits desktoppicture::params {
 	 		}
 	}
 	
-	if $ensure_wallpaper == 'true' {
-		file { "$wallpaper" : 
-		  audit => content, 
-		}
-	
-		exec { "remove_once":
-			 command 				=> "${remove_once_script} ${wallpaper_name}",
-			 path      => "/usr/local/bin/:/bin/",
-		   refreshonly    => true,
-		   subscribe      => file["$wallpaper"],
-		}
-	}
+	# if $ensure_wallpaper == 'true' {
+	# 	file { "$wallpaper" :
+	# 	  audit => content,
+	# 	}
+	#
+	# 	exec { "remove_once":
+	# 		 command 				=> "${remove_once_script} ${wallpaper_name}",
+	# 		 path      => "/usr/local/bin/:/bin/",
+	# 	   refreshonly    => true,
+	# 	   subscribe      => File["$wallpaper"],
+	# 	}
+	# }
 }
