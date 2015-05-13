@@ -4,7 +4,7 @@ puppet-desktoppicture
 Puppet module to manage the desktop picture on Mac OS X. This module has been tested to work on 10.7 - 10.10. 
 
 This module will:
-* place the ``set_desktops.py`` script, which handles writing data to the SQLite database file. 
+* place the ``set_desktops.py`` script, which handles changing the desktop picture for all screens. 
 * create a user readable launch script that outset can run at login-every or login-once.
 
 This module has cleanup parameters to easily remove all files placed on the filesystem in the future.
