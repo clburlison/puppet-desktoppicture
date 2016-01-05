@@ -67,22 +67,22 @@ class desktoppicture::params {
   $wallpaper         = hiera('desktoppicture::wallpaper', '')
   $wallpaper_name    = hiera('desktoppicture::wallpaper_name', 'wallpaper')
   $script_path       = hiera('desktoppicture::script_path', '/usr/local/bin/set_desktops.py')
-	$freq              = hiera('desktoppicture::freq', 'once')
+  $freq              = hiera('desktoppicture::freq', 'once')
   $priority          = hiera('desktoppicture::priority', '10')
   $ensure_wallpaper  = hiera('desktoppicture::ensure_wallpaper', 'present')
   $ensure_desktop    = hiera('desktoppicture::ensure_desktop', 'present')
-	$ensure_current		 = hiera('destkoppicture::ensure_current', true)
+  $ensure_current     = hiera('destkoppicture::ensure_current', true)
   
   validate_absolute_path ($wallpaper)
   validate_string ($wallpaper_name)
   validate_absolute_path ($script_path)
-	
+  
   if $freq != 'once' and $freq !='every'{
       fail('Invalid value for freq.')
   }
 
   unless is_integer($priority) {
-    fail("Invalid value for priority. Not an integer.")
+    fail('Invalid value for priority. Not an integer.')
   }
   
   if $ensure_desktop != 'present' and $ensure_desktop !='absent'{
@@ -92,6 +92,6 @@ class desktoppicture::params {
   if $ensure_wallpaper != 'present' and $ensure_wallpaper !='absent'{
       fail('Invalid value for ensure_wallpaper.')
   }
-	
-	validate_bool ($ensure_current)
+  
+  validate_bool ($ensure_current)
 }

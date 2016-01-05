@@ -21,7 +21,7 @@
 class desktoppicture::wallpaper inherits desktoppicture::params {
   
   $outset_path = '/usr/local/outset/login-'
-	$remove_once_script = 'puppet:///modules/desktoppicture/remove_once.sh'
+  $remove_once_script = 'puppet:///modules/desktoppicture/remove_once.sh'
   
   if $ensure_wallpaper == 'present'{
       file {"${outset_path}${freq}/${priority}-${wallpaper_name}.sh":
@@ -32,22 +32,22 @@ class desktoppicture::wallpaper inherits desktoppicture::params {
       }
   }
 
-	if $ensure_wallpaper == 'absent' {
-	    file {"${outset_path}${freq}/${priority}-${wallpaper_name}.sh":
-					ensure => absent,
-	 		}
-	}
-	
-	# if $ensure_wallpaper == 'true' {
-	# 	file { "$wallpaper" :
-	# 	  audit => content,
-	# 	}
-	#
-	# 	exec { "remove_once":
-	# 		 command 				=> "${remove_once_script} ${wallpaper_name}",
-	# 		 path      => "/usr/local/bin/:/bin/",
-	# 	   refreshonly    => true,
-	# 	   subscribe      => File["$wallpaper"],
-	# 	}
-	# }
+  if $ensure_wallpaper == 'absent' {
+      file {"${outset_path}${freq}/${priority}-${wallpaper_name}.sh":
+          ensure => absent,
+       }
+  }
+  
+  # if $ensure_wallpaper == 'true' {
+  # 	file { "$wallpaper" :
+  # 	  audit => content,
+  # 	}
+  #
+  # 	exec { "remove_once":
+  # 		 command 				=> "${remove_once_script} ${wallpaper_name}",
+  # 		 path      => "/usr/local/bin/:/bin/",
+  # 	   refreshonly    => true,
+  # 	   subscribe      => File["$wallpaper"],
+  # 	}
+  # }
 }

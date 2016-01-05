@@ -23,7 +23,7 @@ class desktoppicture::desktops inherits desktoppicture::params {
   $script = 'puppet:///modules/desktoppicture/set_desktops.py'
 
   if $ensure_desktop == 'present'{
-      file {"$script_path":
+      file {$script_path:
           source => $script,
           owner  => root,
           group  => wheel,
@@ -32,7 +32,7 @@ class desktoppicture::desktops inherits desktoppicture::params {
   }
 
   if $ensure_desktop == 'absent' {
-      file {"$script_path":
+      file {$script_path:
           ensure => absent,
       }
   }
