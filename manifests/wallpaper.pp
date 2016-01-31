@@ -21,7 +21,7 @@
 class desktoppicture::wallpaper inherits desktoppicture::params {
 
   if $ensure_wallpaper == 'present'{
-    outset::login_${freq}{"${wallpaper_name}":
+    outset::login_"${freq}"{"${wallpaper_name}":
         ensure   => present,
         script   => template('desktoppicture/wallpaper.erb'),
         priority => ${priority},
@@ -29,7 +29,7 @@ class desktoppicture::wallpaper inherits desktoppicture::params {
     }
   }
   else {
-    outset::login_${freq}{"${wallpaper_name}":
+    outset::login_"${freq}"{"${wallpaper_name}":
         ensure => absent,
         priority => ${priority}
     }
