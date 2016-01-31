@@ -24,13 +24,14 @@ class desktoppicture::wallpaper inherits desktoppicture::params {
     outset::login_"${freq}"{"${wallpaper_name}":
         ensure   => present,
         script   => template('desktoppicture/wallpaper.erb'),
-        priority => ${priority},
+        type     => 'template',
+        priority => "${priority}",
     }
   }
   else {
     outset::login_"${freq}"{"${wallpaper_name}":
         ensure => absent,
-        priority => ${priority}
+        priority => "${priority}",
     }
   }
 }
