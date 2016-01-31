@@ -63,14 +63,14 @@
 #
 # Copyright 2015 Clayton Burlison, unless otherwise noted.
 class desktoppicture::params (
-  $wallpaper         = hiera('desktoppicture::wallpaper', '')
-  $wallpaper_name    = hiera('desktoppicture::wallpaper_name', 'wallpaper')
-  $script_path       = hiera('desktoppicture::script_path', '/usr/local/bin/set_desktops.py')
-  $freq              = hiera('desktoppicture::freq', 'once')
-  $priority          = hiera('desktoppicture::priority', '10')
-  $ensure_wallpaper  = hiera('desktoppicture::ensure_wallpaper', 'present')
-  $ensure_desktop    = hiera('desktoppicture::ensure_desktop', 'present')
-  $ensure_current    = hiera('destkoppicture::ensure_current', true)
+  $wallpaper         = hiera('desktoppicture::wallpaper', ''),
+  $wallpaper_name    = hiera('desktoppicture::wallpaper_name', 'wallpaper'),
+  $script_path       = hiera('desktoppicture::script_path', '/usr/local/bin/set_desktops.py'),
+  $freq              = hiera('desktoppicture::freq', 'once'),
+  $priority          = hiera('desktoppicture::priority', '10'),
+  $ensure_wallpaper  = hiera('desktoppicture::ensure_wallpaper', 'present'),
+  $ensure_desktop    = hiera('desktoppicture::ensure_desktop', 'present'),
+  $ensure_current    = hiera('destkoppicture::ensure_current', true),
 ){
   
   validate_absolute_path ($wallpaper)
