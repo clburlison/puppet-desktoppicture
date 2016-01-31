@@ -17,14 +17,12 @@
 #
 # === Copyright
 #
-# Copyright 2015 Clayton Burlison, unless otherwise noted.
+# Copyright 2016 Clayton Burlison, unless otherwise noted.
 class desktoppicture::desktops inherits desktoppicture::params {
-
-  $script = 'puppet:///modules/desktoppicture/set_desktops.py'
 
   if $ensure_desktop == 'present'{
       file {$script_path:
-          source => $script,
+          source => 'puppet:///modules/desktoppicture/set_desktops.py',
           owner  => root,
           group  => wheel,
           mode   => '0755',

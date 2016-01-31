@@ -17,37 +17,21 @@
 #
 # === Copyright
 #
-# Copyright 2015 Clayton Burlison, unless otherwise noted.
+# Copyright 2016 Clayton Burlison, unless otherwise noted.
 class desktoppicture::wallpaper inherits desktoppicture::params {
 
-  $outset_path = '/usr/local/outset/login-'
-  $remove_once_script = 'puppet:///modules/desktoppicture/remove_once.sh'
-
   if $ensure_wallpaper == 'present'{
-      file {"${outset_path}${freq}/${priority}-${wallpaper_name}.sh":
-          owner   => root,
-          group   => wheel,
-          mode    => '0755',
-          content => template('desktoppicture/wallpaper.erb')
-      }
+    outset::login_${freq}{"${wallpaper_name}":
+        ensure   => present,
+        script   => template('desktoppicture/wallpaper.erb'),
+        priority => ${priority},
+        type     => 'template'
+    }
   }
-
-  if $ensure_wallpaper == 'absent' {
-      file {"${outset_path}${freq}/${priority}-${wallpaper_name}.sh":
-          ensure => absent,
-       }
+  else {
+    outset::login_${freq}{"${wallpaper_name}":
+        ensure => absent,
+        priority => ${priority}
+    }
   }
-
-  # if $ensure_wallpaper == 'true' {
-  # 	file { "$wallpaper" :
-  # 	  audit => content,
-  # 	}
-  #
-  # 	exec { "remove_once":
-  # 		 command 				=> "${remove_once_script} ${wallpaper_name}",
-  # 		 path      => "/usr/local/bin/:/bin/",
-  # 	   refreshonly    => true,
-  # 	   subscribe      => File["$wallpaper"],
-  # 	}
-  # }
 }

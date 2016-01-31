@@ -16,7 +16,7 @@
 #
 # === Copyright
 #
-# Copyright 2015 Clayton Burlison, unless otherwise noted.
+# Copyright 2016 Clayton Burlison, unless otherwise noted.
 class desktoppicture{
   include desktoppicture::setup
 }

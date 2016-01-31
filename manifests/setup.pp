@@ -37,13 +37,12 @@
 #
 # === Copyright
 #
-# Copyright 2015 Clayton Burlison, unless otherwise noted.
+# Copyright 2016 Clayton Burlison, unless otherwise noted.
 class desktoppicture::setup inherits desktoppicture::params {
-    
   if $::osfamily != 'Darwin' {
       fail("Unsupported osfamily: ${::osfamily}")
     }
-  
+
   if ! defined(File['/usr/local']) {
     file { '/usr/local':
       ensure => directory,
@@ -55,7 +54,7 @@ class desktoppicture::setup inherits desktoppicture::params {
       ensure => directory,
     }
   }
-  
+
   if ! defined(File['/usr/local/outset/login-every']) {
     file { '/usr/local/outset/login-every':
       ensure => directory,
@@ -68,7 +67,7 @@ class desktoppicture::setup inherits desktoppicture::params {
     }
   }
 
+  require outset
   contain desktoppicture::wallpaper
   contain desktoppicture::desktops
-    
 }
